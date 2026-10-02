@@ -41,6 +41,10 @@ export const skills = [
   },
 ]
 
+// Optional per project: `repo` (GitHub URL) and `demo` (live site URL).
+// When set, link icons appear on the project card, e.g.
+//   repo: 'https://github.com/adithaanusara/serendeva',
+//   demo: 'https://serendeva.vercel.app',
 export const projects = [
   {
     name: 'Serendeva',
@@ -55,6 +59,7 @@ export const projects = [
     description:
       'Microservices backend covering warehouse and shipment workflows, with containerized deployment and a RabbitMQ message broker.',
     stack: ['Microservices', 'JavaScript', 'Python', 'RabbitMQ', 'Docker', 'Kubernetes', 'HTML'],
+    repo: 'https://github.com/adithaanusara/swifttrack',
   },
   {
     name: 'WearAI',
@@ -62,6 +67,8 @@ export const projects = [
     description:
       'E-commerce storefront with a RAG and tool-calling AI assistant for smart product discovery.',
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'PostgreSQL', 'PayHere', 'Docker'],
+    repo: 'https://github.com/adithaanusara/wearai',
+    demo: 'https://wearai-web.vercel.app',
   },
   {
     name: 'Iskole',
@@ -76,6 +83,7 @@ export const projects = [
     description:
       'RESTful API with Spring Security and JWT authentication, built on a layered Controller-Service-Repository pattern.',
     stack: ['Java 21', 'Spring Boot', 'Spring Data JPA', 'JWT', 'MySQL', 'Maven'],
+    repo: 'https://github.com/adithaanusara/foodexpress-backend',
   },
 ]
 
