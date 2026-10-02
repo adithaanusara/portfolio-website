@@ -17,8 +17,8 @@ export default function Hero() {
         <h1 className="text-4xl font-bold tracking-tight text-fg sm:text-6xl">{profile.name}</h1>
         <p className="mt-4 text-lg text-muted sm:text-xl">
           {profile.role}
-          <span className="text-subtle"> | </span>
-          <span className="text-fg">{profile.tagline}</span>
+          <span className="hidden text-subtle sm:inline"> | </span>
+          <span className="block text-fg sm:inline">{profile.tagline}</span>
         </p>
         <p className="mt-4 flex items-center gap-2 text-sm text-subtle">
           <MapPinIcon width={15} height={15} />
