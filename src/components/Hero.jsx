@@ -1,7 +1,8 @@
 import Container from './Container.jsx'
 import TerminalCard from './TerminalCard.jsx'
-import { GitHubIcon, LinkedInIcon, MailIcon, MapPinIcon } from './Icons.jsx'
+import { DownloadIcon, GitHubIcon, LinkedInIcon, MailIcon, MapPinIcon } from './Icons.jsx'
 import { profile } from '../data/portfolio.js'
+import { resumeFileName, resumeUrl } from '../data/resume.js'
 
 const socials = [
   { label: 'GitHub', href: profile.github, Icon: GitHubIcon },
@@ -38,6 +39,16 @@ export default function Hero() {
           >
             get in touch
           </a>
+          {resumeUrl && (
+            <a
+              href={resumeUrl}
+              download={resumeFileName}
+              className="inline-flex items-center gap-2 rounded-md border border-border px-4 py-2 text-sm text-fg transition-colors hover:border-accent hover:text-accent"
+            >
+              <DownloadIcon width={15} height={15} />
+              résumé
+            </a>
+          )}
           <ul className="ml-1 flex items-center gap-1">
             {socials.map(({ label, href, Icon }) => (
               <li key={label}>

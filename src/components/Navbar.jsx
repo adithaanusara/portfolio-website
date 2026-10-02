@@ -1,12 +1,14 @@
 import { useEffect, useState } from 'react'
 import Container from './Container.jsx'
 import { CloseIcon, MenuIcon } from './Icons.jsx'
+import ScrollProgress from './ScrollProgress.jsx'
+import { shortcutLabel } from './CommandPalette.jsx'
 import useActiveSection from '../hooks/useActiveSection.js'
 import { navLinks, profile } from '../data/portfolio.js'
 
 const sectionIds = navLinks.map((link) => link.id)
 
-export default function Navbar() {
+export default function Navbar({ onOpenPalette }) {
   const [open, setOpen] = useState(false)
   const active = useActiveSection(sectionIds)
 
@@ -40,6 +42,16 @@ export default function Navbar() {
                 </a>
               </li>
             ))}
+            <li>
+              <button
+                type="button"
+                onClick={onOpenPalette}
+                aria-label="Open command palette"
+                className="rounded border border-border px-2 py-0.5 text-xs text-subtle transition-colors hover:border-accent/60 hover:text-fg"
+              >
+                {shortcutLabel}
+              </button>
+            </li>
           </ul>
         </nav>
 
@@ -74,6 +86,8 @@ export default function Navbar() {
           </Container>
         </nav>
       )}
+
+      <ScrollProgress />
     </header>
   )
 }
