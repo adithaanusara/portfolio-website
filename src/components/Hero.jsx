@@ -1,4 +1,5 @@
 import Container from './Container.jsx'
+import TerminalCard from './TerminalCard.jsx'
 import { GitHubIcon, LinkedInIcon, MailIcon, MapPinIcon } from './Icons.jsx'
 import { profile } from '../data/portfolio.js'
 
@@ -53,6 +54,8 @@ export default function Hero() {
             ))}
           </ul>
         </div>
+
+        <TerminalCard />
       </Container>
     </section>
   )
