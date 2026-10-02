@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react'
 import Container from './Container.jsx'
 import { CloseIcon, MenuIcon } from './Icons.jsx'
+import useActiveSection from '../hooks/useActiveSection.js'
 import { navLinks, profile } from '../data/portfolio.js'
+
+const sectionIds = navLinks.map((link) => link.id)
 
 export default function Navbar() {
   const [open, setOpen] = useState(false)
+  const active = useActiveSection(sectionIds)
 
   useEffect(() => {
     if (!open) return
@@ -25,7 +29,13 @@ export default function Navbar() {
           <ul className="flex items-center gap-6 text-sm">
             {navLinks.map((link) => (
               <li key={link.id}>
-                <a href={`#${link.id}`} className="text-muted transition-colors hover:text-fg">
+                <a
+                  href={`#${link.id}`}
+                  aria-current={active === link.id ? 'true' : undefined}
+                  className={`transition-colors hover:text-fg ${
+                    active === link.id ? 'text-accent' : 'text-muted'
+                  }`}
+                >
                   {link.label}
                 </a>
               </li>
