@@ -1,4 +1,7 @@
+import { useCallback, useState } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import Navbar from './components/Navbar.jsx'
+import CommandPalette from './components/CommandPalette.jsx'
 import Hero from './components/Hero.jsx'
 import About from './components/About.jsx'
 import Skills from './components/Skills.jsx'
@@ -9,6 +12,9 @@ import Contact from './components/Contact.jsx'
 import Footer from './components/Footer.jsx'
 
 export default function App() {
+  const [paletteOpen, setPaletteOpen] = useState(false)
+  const openPalette = useCallback(() => setPaletteOpen(true), [])
+
   return (
     <>
       <a
@@ -17,7 +23,7 @@ export default function App() {
       >
         skip to content
       </a>
-      <Navbar />
+      <Navbar onOpenPalette={openPalette} />
       <main id="content">
         <Hero />
         <About />
@@ -28,6 +34,8 @@ export default function App() {
         <Contact />
       </main>
       <Footer />
+      <CommandPalette open={paletteOpen} onOpenChange={setPaletteOpen} />
+      <Analytics />
     </>
   )
 }
