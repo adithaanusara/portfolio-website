@@ -11,8 +11,14 @@ import Footer from './components/Footer.jsx'
 export default function App() {
   return (
     <>
+      <a
+        href="#content"
+        className="sr-only z-50 rounded-md bg-accent px-4 py-2 text-sm font-semibold text-bg focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+      >
+        skip to content
+      </a>
       <Navbar />
-      <main>
+      <main id="content">
         <Hero />
         <About />
         <Skills />
