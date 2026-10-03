@@ -1,6 +1,7 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
 import Container from './Container.jsx'
+import Avatar from './Avatar.jsx'
 import NetworkCanvas from './NetworkCanvas.jsx'
 import ContributionGraph from './ContributionGraph.jsx'
 import LocalTime from './LocalTime.jsx'
@@ -50,9 +51,12 @@ export default function Hero() {
         {/* bottom: name + graph */}
         <div className="flex flex-col gap-8 p-5 sm:p-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <p className="mb-3 text-sm text-accent">
-              <span className="text-subtle">~/</span>hello, I&apos;m
-            </p>
+            <div className="mb-5 flex items-center gap-4 sm:mb-6 sm:gap-5">
+              <Avatar className="h-20 w-20 sm:h-24 sm:w-24 lg:h-28 lg:w-28" />
+              <p className="text-sm text-accent sm:text-base">
+                <span className="text-subtle">~/</span>hello, I&apos;m
+              </p>
+            </div>
             <h1 className="text-[clamp(4.5rem,15vw,12.5rem)] leading-[0.82] font-extrabold tracking-tighter text-[#e9f5ee]">
               {profile.firstName}
               <span
