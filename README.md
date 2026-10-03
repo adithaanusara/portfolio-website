@@ -42,7 +42,7 @@ src/
 │   ├── certificates/ # certificate images (WebP, metadata-free)
 │   ├── projects/   # project screenshots (WebP)
 │   └── tech/       # tech stack logos
-├── components/     # Intro, Hero, About, Journey, Stack, Projects, Certifications, Contact, Footer, …
+├── components/     # Intro, Hero, IdBadge, About, Journey, Stack, Projects, Certifications, Contact, Footer, …
 ├── data/           # portfolio content
 ├── hooks/          # useActiveSection (nav highlighting)
 ├── lib/            # smooth scroll helpers, journey road geometry
@@ -58,6 +58,7 @@ src/
 - The globe is created at an idle moment after load (so its shader compile never lands mid-scroll), redraws at 30 fps and renders below screen resolution. Its cost depends only on canvas pixels × frames — dot count and the shader's rim glow are free — so resolution is the knob in `renderBudget()` in [`Globe.jsx`](src/components/Globe.jsx).
 - Avoid `blur()` filters, `backdrop-filter` and masks on large areas, especially near anything animated: they were the main cost when scrolling the contact section. Glows and fades there are plain gradients instead.
 - The journey timeline's winding road is an SVG path built from the nodes' measured positions, so it follows them at any screen size. Its scroll-driven fill updates the SVG directly (no React re-render per frame) and its layers are sized tightly around the road to keep the glow cheap.
+- The hero ID badge is a small pendulum simulation written to the DOM directly; it runs only while the badge is moving and on screen, and is static for reduced motion. Its size comes from the `--badge-w` and `--strap` variables set on the hero card.
 - Keyboard: skip link, visible focus rings, ⌘K / Ctrl+K command palette, arrow keys in the project carousel.
 
 ## Deployment
