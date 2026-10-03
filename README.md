@@ -28,6 +28,7 @@ All text — profile, stack, projects, journey, certifications, ribbon text — 
 | --- | --- |
 | Project screenshots | Add `src/assets/projects/<prefix>-1.webp`, `<prefix>-2.webp`, … and set `screenshots: '<prefix>'` on the project. They show as an auto-advancing gallery with a full-size viewer. Keep them around 1600px wide (WebP) so the page stays light. Without screenshots, the card shows a code-style preview built from `preview`. |
 | Certificate image | Add `src/assets/certificates/<name>-card.webp` (~900px) and `<name>-full.webp` (~2200px) and set `image: '<name>'` on the certification. Export them from a flattened, cropped scan and never commit original phone photos — they carry EXIF/GPS data (originals in that folder are git-ignored). |
+| Certificate gallery | For several certificates on one achievement, add `<name>-thumb.webp` (~240px) and `<name>-full.webp` (~1600px) per certificate and list them under `certificates` on the achievement, with `event` and `result` worded as printed. |
 | Project links | Set `repo` (or `repos: [{ label, href }]` for several) and/or `demo` on the project. |
 | Tech logos | SVGs live in `src/assets/tech/` (from [devicon](https://devicon.dev), MIT). Set `icon` on a skill to use one; items without an icon get a monogram tile. |
 
