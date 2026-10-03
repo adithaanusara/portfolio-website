@@ -8,6 +8,9 @@ dist-ssr
 .vercel
 
 # Original photos can carry EXIF/GPS metadata — only commit the processed WebP exports
+src/assets/*.jpg
+src/assets/*.jpeg
+src/assets/*.heic
 src/assets/certificates/*.jpg
 src/assets/certificates/*.jpeg
 src/assets/certificates/*.heic
