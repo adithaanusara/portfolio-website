@@ -1,106 +1,254 @@
 export const profile = {
   name: 'Aditha Anusara',
+  firstName: 'Aditha',
   handle: 'adithaanusara',
   role: 'Software Engineering Undergraduate',
   tagline: 'Full Stack & Distributed Systems Developer',
   location: 'Colombo, Sri Lanka',
+  timeZone: 'Asia/Colombo',
+  coordinates: [6.9271, 79.8612],
   email: 'adithaanusara31@gmail.com',
   phone: '+94 76 577 0642',
   github: 'https://github.com/adithaanusara',
   linkedin: 'https://www.linkedin.com/in/aditha-anusara-39832a351',
-  about: [
-    'I am a Computer Science undergraduate at the University of Colombo School of Computing who enjoys building software end to end — from mobile and web frontends to the services, queues and databases behind them.',
-    'Lately I have been working on distributed systems with microservices, message brokers and containers, and on AI features using the Claude API, retrieval-augmented generation and tool calling.',
-  ],
+  quote: 'Building software end to end — from the screen you tap to the services, queues and databases behind it.',
+  about:
+    'I am a Computer Science undergraduate at the University of Colombo School of Computing who enjoys building software end to end — from mobile and web frontends to the services, queues and databases behind them. Lately I have been working on distributed systems with microservices, message brokers and containers, and on AI features using the Claude API, retrieval-augmented generation and tool calling.',
 }
 
+export const navLinks = [
+  { id: 'about', label: 'about' },
+  { id: 'journey', label: 'journey' },
+  { id: 'stack', label: 'stack' },
+  { id: 'projects', label: 'projects' },
+  { id: 'certifications', label: 'certs' },
+]
+
+export const ribbons = {
+  intro: ['Full Stack Development', 'Distributed Systems', 'Microservices', 'AI & LLM Apps', 'React · Next.js · NestJS', 'Spring Boot · FastAPI'],
+  journey: ['University of Colombo School of Computing', 'B.Sc. in Computer Science', 'IJSE', 'Certified Master Java Developer', 'Mahinda College, Galle'],
+  stack: ['Frontend · Backend · DevOps', 'Docker · Kubernetes · RabbitMQ', 'Claude API · RAG · Tool Calling', 'PostgreSQL · MySQL · Prisma'],
+  footer: [`GitHub: @adithaanusara`, 'Colombo, Sri Lanka', 'adithaanusara31@gmail.com', 'Full Stack & Distributed Systems'],
+}
+
+// Logo files live in src/assets/tech (from devicon, MIT). `invert` marks
+// black logos that need flipping to show on the dark background.
 export const skills = [
   {
     category: 'Languages',
-    items: ['Java', 'JavaScript', 'Python', 'PHP', 'TypeScript', 'SQL', 'HTML5', 'CSS3'],
+    items: [
+      { name: 'Java', icon: 'java' },
+      { name: 'JavaScript', icon: 'javascript' },
+      { name: 'Python', icon: 'python' },
+      { name: 'PHP', icon: 'php' },
+      { name: 'TypeScript', icon: 'typescript' },
+      { name: 'SQL' },
+      { name: 'HTML5', icon: 'html5' },
+      { name: 'CSS3', icon: 'css3' },
+    ],
   },
   {
     category: 'Frontend',
-    items: ['React.js', 'React Native', 'Next.js', 'Tailwind CSS'],
+    items: [
+      { name: 'React.js', icon: 'react' },
+      { name: 'React Native', icon: 'react' },
+      { name: 'Next.js', icon: 'nextjs', invert: true },
+      { name: 'Tailwind CSS', icon: 'tailwindcss' },
+    ],
   },
   {
     category: 'Backend & APIs',
-    items: ['NestJS', 'FastAPI', 'Spring Boot', 'Java EE', 'JDBC', 'Hibernate/ORM'],
+    items: [
+      { name: 'NestJS', icon: 'nestjs' },
+      { name: 'FastAPI', icon: 'fastapi' },
+      { name: 'Spring Boot', icon: 'spring' },
+      { name: 'Java EE' },
+      { name: 'JDBC' },
+      { name: 'Hibernate/ORM', icon: 'hibernate' },
+    ],
   },
   {
     category: 'AI & LLM',
-    items: ['Anthropic Claude API', 'RAG', 'Tool/Function Calling', 'Prompt Engineering'],
+    items: [
+      { name: 'Anthropic Claude API' },
+      { name: 'RAG' },
+      { name: 'Tool/Function Calling' },
+      { name: 'Prompt Engineering' },
+    ],
   },
   {
     category: 'Databases & Storage',
-    items: ['PostgreSQL', 'MySQL', 'NeonDB', 'Supabase', 'Prisma ORM', 'Cloudflare R2', 'Cloudinary'],
+    items: [
+      { name: 'PostgreSQL', icon: 'postgresql' },
+      { name: 'MySQL', icon: 'mysql' },
+      { name: 'NeonDB' },
+      { name: 'Supabase', icon: 'supabase' },
+      { name: 'Prisma ORM', icon: 'prisma', invert: true },
+      { name: 'Cloudflare R2', icon: 'cloudflare' },
+      { name: 'Cloudinary' },
+    ],
   },
   {
     category: 'DevOps & Tools',
-    items: ['Docker', 'Kubernetes', 'RabbitMQ', 'Vercel', 'Git', 'GitHub', 'Postman', 'VS Code'],
+    items: [
+      { name: 'Docker', icon: 'docker' },
+      { name: 'Kubernetes', icon: 'kubernetes' },
+      { name: 'RabbitMQ', icon: 'rabbitmq' },
+      { name: 'Vercel', icon: 'vercel', invert: true },
+      { name: 'Git', icon: 'git' },
+      { name: 'GitHub', icon: 'github', invert: true },
+      { name: 'Postman', icon: 'postman' },
+      { name: 'VS Code', icon: 'vscode' },
+    ],
   },
 ]
 
-// Optional per project: `repo` (GitHub URL) and `demo` (live site URL).
-// When set, link icons appear on the project card, e.g.
-//   repo: 'https://github.com/adithaanusara/serendeva',
-//   demo: 'https://serendeva.vercel.app',
+// Optional per project: `repo` (GitHub URL), `demo` (live site URL) and
+// `image` (screenshot in src/assets/projects). Projects without an image get
+// a generated code-style preview built from `preview`.
 export const projects = [
   {
     name: 'Serendeva',
     title: 'AI & VR Digital Wardrobe Platform',
+    category: 'Mobile · Web · AI',
     description:
       'Virtual wardrobe management, personalized outfit recommendations, 3D avatar fashion experiences, and B2B size mapping.',
     stack: ['React Native', 'Next.js', 'NestJS', 'Python', 'PostgreSQL', 'Prisma ORM', 'Cloudflare R2'],
+    highlights: [
+      ['Platform', 'Mobile + Web'],
+      ['Focus', 'AI & 3D'],
+    ],
+    preview: {
+      file: 'wardrobe.service.ts',
+      lines: [
+        ['kw', 'const '], ['fn', 'outfits'], ['tx', ' = await '], ['fn', 'recommend'], ['tx', '({'], ['nl'],
+        ['tx', '  wardrobe: user.'], ['fn', 'items'], ['tx', ','], ['nl'],
+        ['tx', '  avatar: '], ['st', "'3d'"], ['tx', ','], ['nl'],
+        ['tx', '  sizeMap: brand.'], ['fn', 'sizes'], ['tx', ','], ['nl'],
+        ['tx', '})'], ['nl'],
+      ],
+    },
   },
   {
     name: 'SwiftLogistics',
     title: 'Logistics & Shipment Tracking System',
+    category: 'Distributed Systems',
     description:
       'Microservices backend covering warehouse and shipment workflows, with containerized deployment and a RabbitMQ message broker.',
     stack: ['Microservices', 'JavaScript', 'Python', 'RabbitMQ', 'Docker', 'Kubernetes', 'HTML'],
     repo: 'https://github.com/adithaanusara/swifttrack',
+    highlights: [
+      ['Architecture', 'Microservices'],
+      ['Messaging', 'RabbitMQ'],
+    ],
+    preview: {
+      file: 'docker compose up',
+      lines: [
+        ['ok', '✔ '], ['tx', 'rabbitmq           '], ['ok', 'started'], ['nl'],
+        ['ok', '✔ '], ['tx', 'order-service      '], ['ok', 'started'], ['nl'],
+        ['ok', '✔ '], ['tx', 'warehouse-service  '], ['ok', 'started'], ['nl'],
+        ['ok', '✔ '], ['tx', 'shipment-service   '], ['ok', 'started'], ['nl'],
+        ['cm', '→ shipment.created  ▸ queue: tracking'], ['nl'],
+      ],
+    },
   },
   {
     name: 'WearAI',
     title: 'AI Powered Clothing E-Commerce Platform',
-    description:
-      'E-commerce storefront with a RAG and tool-calling AI assistant for smart product discovery.',
+    category: 'AI · E-Commerce',
+    description: 'E-commerce storefront with a RAG and tool-calling AI assistant for smart product discovery.',
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'PostgreSQL', 'PayHere', 'Docker'],
     repo: 'https://github.com/adithaanusara/wearai',
     demo: 'https://wearai-web.vercel.app',
+    highlights: [
+      ['AI', 'RAG + Tools'],
+      ['Payments', 'PayHere'],
+    ],
+    preview: {
+      file: 'assistant.py',
+      lines: [
+        ['kw', 'async def '], ['fn', 'ask'], ['tx', '(query: str):'], ['nl'],
+        ['tx', '    docs = '], ['kw', 'await '], ['fn', 'retrieve'], ['tx', '(query, k='], ['st', '8'], ['tx', ')'], ['nl'],
+        ['tx', '    tools = ['], ['fn', 'search_products'], ['tx', ', '], ['fn', 'check_size'], ['tx', ']'], ['nl'],
+        ['kw', '    return await '], ['fn', 'claude'], ['tx', '(query, docs, tools)'], ['nl'],
+        ['cm', '# → "3 linen shirts under LKR 5,000"'], ['nl'],
+      ],
+    },
   },
   {
     name: 'Iskole',
     title: 'School Management System',
-    description:
-      'Role-based system for Sri Lankan schools handling marks, attendance, timetables, and security.',
+    category: 'Web · MVC',
+    description: 'Role-based system for Sri Lankan schools handling marks, attendance, timetables, and security.',
     stack: ['PHP', 'MySQL', 'Docker', 'MVC Architecture'],
+    highlights: [
+      ['Access', 'Role-based'],
+      ['Pattern', 'MVC'],
+    ],
+    preview: {
+      file: 'routes.php',
+      lines: [
+        ['fn', '$router'], ['tx', '->'], ['fn', 'get'], ['tx', '('], ['st', "'/marks'"], ['tx', ', '], ['st', "'MarksController'"], ['tx', ')'], ['nl'],
+        ['tx', '  ->'], ['fn', 'role'], ['tx', '('], ['st', "'teacher'"], ['tx', ');'], ['nl'],
+        ['fn', '$router'], ['tx', '->'], ['fn', 'post'], ['tx', '('], ['st', "'/attendance'"], ['tx', ', ...);'], ['nl'],
+        ['fn', '$router'], ['tx', '->'], ['fn', 'get'], ['tx', '('], ['st', "'/timetable'"], ['tx', ', ...);'], ['nl'],
+      ],
+    },
   },
   {
     name: 'FoodExpress Backend',
     title: 'Online Food Ordering System',
+    category: 'Backend API',
     description:
       'RESTful API with Spring Security and JWT authentication, built on a layered Controller-Service-Repository pattern.',
     stack: ['Java 21', 'Spring Boot', 'Spring Data JPA', 'JWT', 'MySQL', 'Maven'],
     repo: 'https://github.com/adithaanusara/foodexpress-backend',
+    highlights: [
+      ['Auth', 'JWT'],
+      ['Pattern', 'Layered'],
+    ],
+    preview: {
+      file: 'OrderController.java',
+      lines: [
+        ['cm', '@PostMapping("/api/orders")'], ['nl'],
+        ['kw', 'public '], ['tx', 'ResponseEntity<OrderDto> '], ['fn', 'place'], ['tx', '('], ['nl'],
+        ['tx', '    @AuthenticationPrincipal User user,'], ['nl'],
+        ['tx', '    @Valid @RequestBody OrderRequest req) {'], ['nl'],
+        ['kw', '  return '], ['tx', 'ok(orderService.'], ['fn', 'place'], ['tx', '(user, req));'], ['nl'],
+        ['tx', '}'], ['nl'],
+      ],
+    },
   },
 ]
 
-export const education = [
+// Chronological. Years are only shown where known.
+export const journey = [
   {
-    degree: 'B.Sc. in Computer Science',
+    kind: 'School',
+    title: 'G.C.E. Advanced Level',
+    detail: 'Physical Science stream',
+    institution: 'Mahinda College, Galle',
+    period: null,
+  },
+  {
+    kind: 'University',
+    title: 'B.Sc. in Computer Science',
+    detail: 'Undergraduate degree',
     institution: 'University of Colombo School of Computing (UCSC)',
     period: '2023 – Present',
   },
   {
-    degree: 'Software Engineering Program',
+    kind: 'Program',
+    title: 'Software Engineering Program',
+    detail: 'Professional software engineering training',
     institution: 'Institute of Java and Software Engineering (IJSE)',
     period: '2026',
   },
   {
-    degree: 'G.C.E. Advanced Level (Physical Science)',
-    institution: 'Mahinda College, Galle',
+    kind: 'Certification',
+    title: 'Certified Master Java Developer',
+    detail: 'CMJD — SOLID, design patterns, Spring, Hibernate',
+    institution: 'Institute of Java and Software Engineering (IJSE)',
     period: null,
   },
 ]
@@ -108,23 +256,20 @@ export const education = [
 export const certifications = [
   {
     title: 'Certified Master Java Developer (CMJD)',
+    short: 'CMJD',
     issuer: 'Institute of Java and Software Engineering (IJSE)',
+    category: 'Software Engineering',
     description:
       'Deep dive into SOLID principles, layered architecture, design patterns, DSA, Spring Framework, Hibernate/ORM, JDBC, and Java EE.',
+    topics: ['SOLID', 'Design Patterns', 'DSA', 'Spring', 'Hibernate', 'JDBC', 'Java EE'],
   },
 ]
 
 export const achievements = [
   {
     title: 'Former School Badminton Team Captain',
-    description: 'Represented at District, Provincial, and National levels.',
+    category: 'Sport & Leadership',
+    description: 'Captained the school badminton team and played at District, Provincial and National level.',
+    levels: ['District', 'Provincial', 'National'],
   },
-]
-
-export const navLinks = [
-  { id: 'about', label: 'about' },
-  { id: 'skills', label: 'stack' },
-  { id: 'projects', label: 'projects' },
-  { id: 'education', label: 'education' },
-  { id: 'contact', label: 'contact' },
 ]
