@@ -26,7 +26,6 @@ All text — profile, stack, projects, journey, certifications, ribbon text — 
 
 | To change… | Do this |
 | --- | --- |
-| Résumé button | Drop a `.pdf` into `src/assets/resume/`. The button appears automatically. |
 | Project screenshots | Add `src/assets/projects/<prefix>-1.webp`, `<prefix>-2.webp`, … and set `screenshots: '<prefix>'` on the project. They show as an auto-advancing gallery with a full-size viewer. Keep them around 1600px wide (WebP) so the page stays light. Without screenshots, the card shows a code-style preview built from `preview`. |
 | Project links | Set `repo` (or `repos: [{ label, href }]` for several) and/or `demo` on the project. |
 | Tech logos | SVGs live in `src/assets/tech/` (from [devicon](https://devicon.dev), MIT). Set `icon` on a skill to use one; items without an icon get a monogram tile. |
@@ -39,10 +38,9 @@ Theme colors, fonts and utilities (`text-gradient`, `bg-grid`, marquee) are defi
 src/
 ├── assets/
 │   ├── projects/   # project screenshots (WebP)
-│   ├── resume/     # CV (PDF)
 │   └── tech/       # tech stack logos
 ├── components/     # Intro, Hero, About, Journey, Stack, Projects, Certifications, Contact, Footer, …
-├── data/           # portfolio content + résumé lookup
+├── data/           # portfolio content
 ├── hooks/          # useActiveSection (nav highlighting)
 ├── lib/            # smooth scroll helpers
 ├── App.jsx

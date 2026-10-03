@@ -1,6 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { navLinks, profile } from '../data/portfolio.js'
-import { resumeFileName, resumeUrl } from '../data/resume.js'
 import { lockScroll, scrollToId } from '../lib/scroll.js'
 
 export const shortcutLabel = /Mac|iPhone|iPad/.test(navigator.userAgent) ? '⌘K' : 'Ctrl K'
@@ -29,21 +28,6 @@ const commands = [
       window.location.href = `mailto:${profile.email}`
     },
   },
-  ...(resumeUrl
-    ? [
-        {
-          id: 'download-resume',
-          label: 'download résumé',
-          hint: 'pdf',
-          run: () => {
-            const a = document.createElement('a')
-            a.href = resumeUrl
-            a.download = resumeFileName
-            a.click()
-          },
-        },
-      ]
-    : []),
   {
     id: 'open-github',
     label: 'open github',

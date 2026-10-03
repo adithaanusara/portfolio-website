@@ -4,10 +4,9 @@ import Container from './Container.jsx'
 import NetworkCanvas from './NetworkCanvas.jsx'
 import ContributionGraph from './ContributionGraph.jsx'
 import LocalTime from './LocalTime.jsx'
-import { ArrowRightIcon, DownloadIcon, GitHubIcon, LinkedInIcon, MailIcon, MapPinIcon } from './Icons.jsx'
+import { ArrowRightIcon, GitHubIcon, LinkedInIcon, MailIcon, MapPinIcon } from './Icons.jsx'
 import { scrollToId } from '../lib/scroll.js'
 import { profile } from '../data/portfolio.js'
-import { resumeFileName, resumeUrl } from '../data/resume.js'
 
 const socials = [
   { label: 'GitHub', href: profile.github, Icon: GitHubIcon },
@@ -103,16 +102,6 @@ export default function Hero() {
           >
             get in touch
           </a>
-          {resumeUrl && (
-            <a
-              href={resumeUrl}
-              download={resumeFileName}
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-surface px-5 py-3 text-sm text-fg transition-colors hover:border-accent/60"
-            >
-              <DownloadIcon width={15} height={15} />
-              résumé
-            </a>
-          )}
         </div>
         <ul className="flex items-center gap-2">
           {socials.map(({ label, href, Icon }) => (

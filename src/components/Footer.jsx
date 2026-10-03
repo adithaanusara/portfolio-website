@@ -1,10 +1,9 @@
 import Container from './Container.jsx'
 import Ribbon from './Ribbon.jsx'
 import Reveal from './Reveal.jsx'
-import { ArrowRightIcon, ArrowUpIcon, DownloadIcon, GitHubIcon, LinkedInIcon, MailIcon } from './Icons.jsx'
+import { ArrowRightIcon, ArrowUpIcon, GitHubIcon, LinkedInIcon, MailIcon } from './Icons.jsx'
 import { scrollToId } from '../lib/scroll.js'
 import { profile, ribbons } from '../data/portfolio.js'
-import { resumeFileName, resumeUrl } from '../data/resume.js'
 
 const pill =
   'inline-flex items-center gap-2 rounded-full border border-border bg-surface px-4 py-2.5 text-xs text-muted transition-colors hover:border-accent/60 hover:text-fg'
@@ -61,11 +60,6 @@ export default function Footer() {
             <a href={`mailto:${profile.email}`} className={pill}>
               <MailIcon width={14} height={14} /> Email
             </a>
-            {resumeUrl && (
-              <a href={resumeUrl} download={resumeFileName} className={pill}>
-                <DownloadIcon width={14} height={14} /> Résumé
-              </a>
-            )}
           </div>
         </Reveal>
       </Container>
