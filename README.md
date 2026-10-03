@@ -1,12 +1,15 @@
 # Aditha Anusara — Portfolio
 
-Personal developer portfolio built with React, Vite and Tailwind CSS. Dark, high-contrast, monospace (JetBrains Mono / Fira Code) design.
+Personal developer portfolio built with React, Vite and Tailwind CSS. Dark, high-contrast, terminal-green design set entirely in JetBrains Mono, with scroll-driven animation throughout.
 
 ## Tech
 
 - React 19 + Vite
 - Tailwind CSS v4 (`@tailwindcss/vite`)
-- No UI libraries — inline SVG icons, IntersectionObserver for scroll effects
+- [Motion](https://motion.dev) for scroll-driven and layout animation
+- [Lenis](https://lenis.darkroom.engineering) for smooth scrolling
+- [cobe](https://github.com/shuding/cobe) for the WebGL globe (lazy-loaded)
+- Vercel Analytics
 
 ## Getting started
 
@@ -19,22 +22,40 @@ npm run preview   # serve the production build
 
 ## Editing content
 
-All text — profile, tech stack, projects, education, certifications — lives in [`src/data/portfolio.js`](src/data/portfolio.js). Components read from it, so most updates don't need to touch JSX.
+All text — profile, stack, projects, journey, certifications, ribbon text — lives in [`src/data/portfolio.js`](src/data/portfolio.js). Components read from it, so most updates don't need to touch JSX.
 
-Theme colors and fonts are defined as tokens in the `@theme` block of [`src/index.css`](src/index.css).
+| To change… | Do this |
+| --- | --- |
+| Résumé button | Drop a `.pdf` into `src/assets/resume/`. The button appears automatically. |
+| Project screenshot | Add `src/assets/projects/<name>.webp` (or png/jpg) and set `image: '<name>'` on the project. Without one, the card shows a code-style preview built from `preview`. |
+| Project links | Set `repo` and/or `demo` on the project. |
+| Tech logos | SVGs live in `src/assets/tech/` (from [devicon](https://devicon.dev), MIT). Set `icon` on a skill to use one; items without an icon get a monogram tile. |
+
+Theme colors, fonts and utilities (`text-gradient`, `bg-grid`, marquee) are defined in [`src/index.css`](src/index.css).
 
 ## Project structure
 
 ```
 src/
-├── components/   # Navbar, Hero, About, Skills, Projects, Education, Certifications, Contact, Footer
-├── data/         # portfolio content
-├── hooks/        # useActiveSection (nav highlighting)
+├── assets/
+│   ├── projects/   # optional project screenshots
+│   ├── resume/     # optional CV (PDF)
+│   └── tech/       # tech stack logos
+├── components/     # Intro, Hero, About, Journey, Stack, Projects, Certifications, Contact, Footer, …
+├── data/           # portfolio content + résumé lookup
+├── hooks/          # useActiveSection (nav highlighting)
+├── lib/            # smooth scroll helpers
 ├── App.jsx
 ├── index.css
 └── main.jsx
 ```
 
+## Accessibility & performance
+
+- Respects `prefers-reduced-motion`: smooth scroll, marquees and animations switch off; all content stays visible.
+- Canvas and WebGL animations pause when off screen; the globe library loads only when the contact section is reached.
+- Keyboard: skip link, visible focus rings, ⌘K / Ctrl+K command palette, arrow keys in the project carousel.
+
 ## Deployment
 
-Deploys to Vercel with zero config — import the repository and Vercel detects Vite automatically (build command `npm run build`, output directory `dist`).
+Deploys to Vercel on every push to `main` (build command `npm run build`, output directory `dist`).
