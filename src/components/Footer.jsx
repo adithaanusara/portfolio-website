@@ -16,8 +16,11 @@ export default function Footer() {
         <Ribbon items={ribbons.intro} tone="accent" tilt={2} reverse duration={50} className="absolute inset-x-0 top-10" />
       </div>
 
-      <div className="absolute inset-0 -z-10 bg-grid [mask-image:linear-gradient(to_bottom,transparent,black_30%)]" />
-      <div className="absolute bottom-0 left-1/2 -z-10 h-[30rem] w-[50rem] -translate-x-1/2 rounded-full bg-accent/[0.06] blur-[120px]" />
+      {/* Grid fading in from the top, and a soft glow at the bottom — both as
+          plain gradients, so there is no mask layer or blur filter to render. */}
+      <div className="absolute inset-0 -z-10 bg-grid" />
+      <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_bottom,var(--color-bg),transparent_30%)]" />
+      <div className="absolute -bottom-60 left-1/2 -z-10 h-[60rem] w-[80rem] -translate-x-1/2 bg-[radial-gradient(closest-side,rgb(74_222_128/0.055),rgb(74_222_128/0.03)_52%,rgb(74_222_128/0.01)_78%,transparent)]" />
 
       <Container size="lg" className="pt-20 pb-10 text-center sm:pt-28">
         <Reveal>
@@ -67,7 +70,7 @@ export default function Footer() {
       <div className="relative">
         <p
           aria-hidden="true"
-          className="mask-fade-b -mb-[0.18em] text-center text-[clamp(5rem,24vw,22rem)] leading-[0.85] font-extrabold tracking-tighter text-white/[0.05] select-none"
+          className="-mb-[0.18em] bg-[linear-gradient(to_bottom,rgb(255_255_255/0.05)_40%,transparent)] bg-clip-text text-center text-[clamp(5rem,24vw,22rem)] leading-[0.85] font-extrabold tracking-tighter text-transparent select-none"
         >
           ADITHA
         </p>

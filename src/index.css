@@ -109,10 +109,6 @@ html.lenis body {
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
 }
 
-@utility mask-fade-b {
-  mask-image: linear-gradient(to bottom, black 40%, transparent);
-}
-
 @layer components {
   .reveal {
     opacity: 0;

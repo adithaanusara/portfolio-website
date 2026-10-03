@@ -19,7 +19,7 @@ export default function SectionHeader({ badge, Icon, title, meta, bgWord, align 
       <Reveal>
         <span
           className={`inline-flex items-center gap-2 rounded-full border px-4 py-1.5 text-[11px] font-medium tracking-[0.25em] uppercase ${
-            onAccent ? 'border-ink/25 text-ink' : 'border-border bg-surface/80 text-muted backdrop-blur'
+            onAccent ? 'border-ink/25 text-ink' : 'border-border bg-surface/90 text-muted'
           }`}
         >
           {Icon && <Icon width={14} height={14} className={onAccent ? '' : 'text-accent'} />}

@@ -46,7 +46,10 @@ export default function Contact() {
 
   return (
     <section id="contact" className="relative isolate scroll-mt-24 overflow-hidden pt-24 pb-12 sm:pt-32 sm:pb-16">
-      <div className="absolute inset-0 -z-20 bg-grid [mask-image:radial-gradient(ellipse_at_center,black,transparent_75%)]" />
+      {/* Grid that fades out towards the edges. The fade is a gradient painted
+          over the grid rather than a mask: same look, no mask layer. */}
+      <div className="absolute inset-0 -z-20 bg-grid" />
+      <div className="absolute inset-0 -z-20 bg-[radial-gradient(ellipse_at_center,transparent,var(--color-bg)_75%)]" />
       <Container size="lg">
         <SectionHeader
           badge="contact"
@@ -60,7 +63,7 @@ export default function Contact() {
           <Reveal>
             <form
               onSubmit={onSubmit}
-              className="rounded-3xl border border-border bg-surface/80 p-6 shadow-2xl shadow-black/50 backdrop-blur sm:p-8"
+              className="rounded-3xl border border-border bg-surface/95 p-6 shadow-2xl shadow-black/50 sm:p-8"
             >
               <div className="grid gap-5 sm:grid-cols-2">
                 <label className="block">
@@ -121,7 +124,10 @@ export default function Contact() {
           </Reveal>
 
           <div className="relative mx-auto w-full max-w-[520px]">
-            <div className="absolute inset-[12%] -z-10 rounded-full bg-accent/15 blur-[80px]" />
+            {/* Soft halo behind the globe. A plain gradient, not a blurred
+                disc: a large blur filter here was one of the biggest costs
+                when scrolling through this section. */}
+            <div className="absolute -inset-[19%] -z-10 bg-[radial-gradient(closest-side,rgb(74_222_128/0.14),rgb(74_222_128/0.075)_55%,rgb(74_222_128/0.024)_78%,transparent)]" />
             <Suspense fallback={<div className="aspect-square w-full" />}>
               <Globe location={profile.coordinates} />
             </Suspense>
