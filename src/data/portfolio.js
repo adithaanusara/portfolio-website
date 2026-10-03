@@ -103,9 +103,13 @@ export const skills = [
   },
 ]
 
-// Optional per project: `repo` (GitHub URL), `demo` (live site URL) and
-// `image` (screenshot in src/assets/projects). Projects without an image get
-// a generated code-style preview built from `preview`.
+// Optional per project:
+//   repo        GitHub URL, or `repos: [{ label, href }]` for several
+//   demo        live site URL
+//   screenshots file prefix in src/assets/projects — `lovelink` picks up
+//               lovelink-1.webp, lovelink-2.webp, … and shows them as a gallery
+//   status      short badge such as 'In progress'
+// Projects without screenshots get a code-style preview built from `preview`.
 export const projects = [
   {
     name: 'Serendeva',
@@ -156,6 +160,7 @@ export const projects = [
     name: 'WearAI',
     title: 'AI Powered Clothing E-Commerce Platform',
     category: 'AI · E-Commerce',
+    status: 'In progress',
     description: 'E-commerce storefront with a RAG and tool-calling AI assistant for smart product discovery.',
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'PostgreSQL', 'PayHere', 'Docker'],
     repo: 'https://github.com/adithaanusara/wearai',
@@ -176,11 +181,43 @@ export const projects = [
     },
   },
   {
+    name: 'LoveLink Studio',
+    title: 'Animated Memory Page Builder',
+    category: 'Full Stack · Web App',
+    description:
+      'Romantic memory-sharing web app where users create animated surprise pages with photos, custom text and interactive extras like a sliding puzzle, then share them through a custom URL.',
+    stack: ['Next.js', 'TypeScript', 'Prisma ORM', 'PostgreSQL', 'Cloudinary', 'NextAuth', 'Framer Motion'],
+    repo: 'https://github.com/adithaanusara/lovelink-studio',
+    demo: 'https://lovelink-studio.vercel.app',
+    screenshots: 'lovelink',
+    highlights: [
+      ['Editor', 'Drag & drop'],
+      ['Sharing', 'Custom URL'],
+    ],
+  },
+  {
+    name: 'P&D Stone',
+    title: 'Client Website — Natural Stone Cladding',
+    category: 'Client Website',
+    description:
+      'Responsive, bilingual (English / Sinhala) website for a Sri Lankan natural stone cladding business, with product showcases, project galleries, animations and WhatsApp quotation requests.',
+    stack: ['React', 'Vite', 'Framer Motion', 'Supabase', 'JavaScript', 'CSS'],
+    repo: 'https://github.com/adithaanusara/stonecraft-client-site',
+    demo: 'https://stonecraft-client-site.vercel.app',
+    screenshots: 'pndstone',
+    highlights: [
+      ['Client', 'P&D Stone'],
+      ['Languages', 'EN + සිං'],
+    ],
+  },
+  {
     name: 'Iskole',
     title: 'School Management System',
     category: 'Web · MVC',
-    description: 'Role-based system for Sri Lankan schools handling marks, attendance, timetables, and security.',
+    description:
+      'Role-based system for Sri Lankan schools with modules for marks, attendance, timetables, reports and announcements, plus secure authentication and sessions.',
     stack: ['PHP', 'MySQL', 'Docker', 'MVC Architecture'],
+    screenshots: 'iskole',
     highlights: [
       ['Access', 'Role-based'],
       ['Pattern', 'MVC'],
@@ -196,13 +233,17 @@ export const projects = [
     },
   },
   {
-    name: 'FoodExpress Backend',
+    name: 'FoodExpress',
     title: 'Online Food Ordering System',
-    category: 'Backend API',
+    category: 'Full Stack',
     description:
-      'RESTful API with Spring Security and JWT authentication, built on a layered Controller-Service-Repository pattern.',
-    stack: ['Java 21', 'Spring Boot', 'Spring Data JPA', 'JWT', 'MySQL', 'Maven'],
-    repo: 'https://github.com/adithaanusara/foodexpress-backend',
+      'Spring Boot REST API with JWT-secured ADMIN and CUSTOMER roles and a layered Controller-Service-Repository design, paired with a React frontend for browsing, cart and checkout.',
+    stack: ['Java 21', 'Spring Boot', 'Spring Data JPA', 'Spring Security', 'JWT', 'MySQL', 'React'],
+    repos: [
+      { label: 'backend', href: 'https://github.com/adithaanusara/foodexpress-backend' },
+      { label: 'frontend', href: 'https://github.com/adithaanusara/online-food-ordering-frontend' },
+    ],
+    screenshots: 'foodexpress',
     highlights: [
       ['Auth', 'JWT'],
       ['Pattern', 'Layered'],
@@ -228,7 +269,7 @@ export const journey = [
     title: 'G.C.E. Advanced Level',
     detail: 'Physical Science stream',
     institution: 'Mahinda College, Galle',
-    period: null,
+    period: '2022',
   },
   {
     kind: 'University',
