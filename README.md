@@ -44,7 +44,7 @@ src/
 ├── components/     # Intro, Hero, About, Journey, Stack, Projects, Certifications, Contact, Footer, …
 ├── data/           # portfolio content
 ├── hooks/          # useActiveSection (nav highlighting)
-├── lib/            # smooth scroll helpers
+├── lib/            # smooth scroll helpers, journey road geometry
 ├── App.jsx
 ├── index.css
 └── main.jsx
@@ -54,6 +54,7 @@ src/
 
 - Respects `prefers-reduced-motion`: smooth scroll, marquees and animations switch off; all content stays visible.
 - Canvas and WebGL animations pause when off screen; the globe library loads only when the contact section is reached.
+- The journey timeline's winding road is an SVG path built from the nodes' measured positions, so it follows them at any screen size. Its scroll-driven fill updates the SVG directly (no React re-render per frame) and its layers are sized tightly around the road to keep the glow cheap.
 - Keyboard: skip link, visible focus rings, ⌘K / Ctrl+K command palette, arrow keys in the project carousel.
 
 ## Deployment
