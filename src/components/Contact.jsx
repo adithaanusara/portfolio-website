@@ -125,10 +125,10 @@ export default function Contact() {
             <Suspense fallback={<div className="aspect-square w-full" />}>
               <Globe location={profile.coordinates} />
             </Suspense>
-            <div className="absolute top-[30%] right-[4%] rounded-xl border border-accent/40 bg-bg/80 px-3 py-2 text-xs backdrop-blur sm:right-[8%]">
+            <div className="absolute top-[30%] right-[4%] rounded-xl border border-accent/40 bg-bg/95 px-3 py-2 text-xs sm:right-[8%]">
               <p className="flex items-center gap-2 font-semibold text-accent">
                 <span className="relative flex h-2 w-2">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60" />
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-60 motion-reduce:animate-none" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
                 </span>
                 Colombo, Sri Lanka
