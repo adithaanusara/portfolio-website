@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { motion, useScroll, useTransform } from 'motion/react'
 import Container from './Container.jsx'
-import Avatar from './Avatar.jsx'
+import IdBadge from './IdBadge.jsx'
 import NetworkCanvas from './NetworkCanvas.jsx'
 import ContributionGraph from './ContributionGraph.jsx'
 import LocalTime from './LocalTime.jsx'
@@ -25,22 +25,25 @@ export default function Hero() {
     <section ref={ref} className="relative px-3 sm:px-5">
       <motion.div
         style={{ scale, y }}
-        className="relative isolate mx-auto flex min-h-[640px] max-w-7xl flex-col justify-between overflow-hidden rounded-[28px] border border-border bg-surface shadow-[0_40px_120px_-30px] shadow-accent/15 sm:h-[86svh]"
+        className="relative isolate mx-auto flex min-h-[640px] max-w-7xl flex-col justify-between overflow-hidden rounded-[28px] border border-border bg-surface shadow-[0_40px_120px_-30px] shadow-accent/15 [--badge-w:9.5rem] [--strap:7.75rem] sm:min-h-[86svh] sm:[--badge-w:11rem] sm:[--strap:9rem] lg:min-h-[max(86svh,46rem)] lg:[--badge-w:11.5rem] lg:[--strap:clamp(5rem,13svh,9rem)]"
       >
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_60%_at_75%_10%,rgba(45,212,191,0.12),transparent),radial-gradient(ellipse_60%_50%_at_10%_90%,rgba(74,222,128,0.10),transparent)]" />
         <div className="absolute inset-0 -z-10 bg-grid opacity-60" />
         <NetworkCanvas className="-z-10" />
         <div className="absolute inset-x-0 bottom-0 -z-10 h-2/3 bg-gradient-to-t from-surface via-surface/70 to-transparent" />
 
-        {/* top bar */}
-        <div className="flex flex-wrap items-start justify-between gap-4 p-5 sm:p-8">
-          <div className="flex items-center gap-3 rounded-full border border-border bg-bg/60 py-1.5 pr-4 pl-1.5 backdrop-blur">
+        {/* ID badge on a lanyard: centred on small screens, above the graph on large ones */}
+        <IdBadge className="left-1/2 lg:right-56 lg:left-auto" />
+
+        {/* top bar — sits in front of the lanyard */}
+        <div className="relative z-10 flex flex-wrap items-start justify-between gap-4 p-5 sm:p-8 lg:justify-start">
+          <div className="flex items-center gap-3 rounded-full border border-border bg-bg/95 py-1.5 pr-4 pl-1.5">
             <span className="grid h-7 w-7 place-items-center rounded-full bg-accent/15 text-accent">
               <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_10px_2px] shadow-accent/60" />
             </span>
             <span className="text-[11px] tracking-[0.2em] text-muted uppercase">{profile.role}</span>
           </div>
-          <div className="flex items-center gap-3 rounded-full border border-border bg-bg/60 px-4 py-2 text-[11px] tracking-wider text-muted backdrop-blur">
+          <div className="flex items-center gap-3 rounded-full border border-border bg-bg/95 px-4 py-2 text-[11px] tracking-wider text-muted">
             <MapPinIcon width={13} height={13} className="text-accent" />
             {profile.location}
             <span className="h-3 w-px bg-border" aria-hidden="true" />
@@ -48,15 +51,18 @@ export default function Hero() {
           </div>
         </div>
 
+        {/* room for the hanging badge where it is part of the column (it hangs beside the text on large screens) */}
+        <div
+          aria-hidden="true"
+          className="h-[calc(var(--strap)+var(--badge-w)*1.64+1rem-6.75rem)] sm:h-[calc(var(--strap)+var(--badge-w)*1.64+1rem-9.25rem)] lg:hidden"
+        />
+
         {/* bottom: name + graph */}
         <div className="flex flex-col gap-8 p-5 sm:p-8 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <div className="mb-5 flex items-center gap-4 sm:mb-6 sm:gap-5">
-              <Avatar className="h-20 w-20 sm:h-24 sm:w-24 lg:h-28 lg:w-28" />
-              <p className="text-sm text-accent sm:text-base">
-                <span className="text-subtle">~/</span>hello, I&apos;m
-              </p>
-            </div>
+            <p className="mb-3 text-sm text-accent sm:text-base">
+              <span className="text-subtle">~/</span>hello, I&apos;m
+            </p>
             <h1 className="text-[clamp(4.5rem,15vw,12.5rem)] leading-[0.82] font-extrabold tracking-tighter text-[#e9f5ee]">
               {profile.firstName}
               <span
