@@ -27,6 +27,7 @@ All text — profile, stack, projects, journey, certifications, ribbon text — 
 | To change… | Do this |
 | --- | --- |
 | Project screenshots | Add `src/assets/projects/<prefix>-1.webp`, `<prefix>-2.webp`, … and set `screenshots: '<prefix>'` on the project. They show as an auto-advancing gallery with a full-size viewer. Keep them around 1600px wide (WebP) so the page stays light. Without screenshots, the card shows a code-style preview built from `preview`. |
+| Certificate image | Add `src/assets/certificates/<name>-card.webp` (~900px) and `<name>-full.webp` (~2200px) and set `image: '<name>'` on the certification. Export them from a flattened, cropped scan and never commit original phone photos — they carry EXIF/GPS data (originals in that folder are git-ignored). |
 | Project links | Set `repo` (or `repos: [{ label, href }]` for several) and/or `demo` on the project. |
 | Tech logos | SVGs live in `src/assets/tech/` (from [devicon](https://devicon.dev), MIT). Set `icon` on a skill to use one; items without an icon get a monogram tile. |
 
@@ -37,6 +38,7 @@ Theme colors, fonts and utilities (`text-gradient`, `bg-grid`, marquee) are defi
 ```
 src/
 ├── assets/
+│   ├── certificates/ # certificate images (WebP, metadata-free)
 │   ├── projects/   # project screenshots (WebP)
 │   └── tech/       # tech stack logos
 ├── components/     # Intro, Hero, About, Journey, Stack, Projects, Certifications, Contact, Footer, …
