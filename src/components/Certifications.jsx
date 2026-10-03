@@ -1,32 +1,55 @@
-import { motion } from 'motion/react'
+import { useCallback, useState } from 'react'
+import { AnimatePresence, motion } from 'motion/react'
 import Container from './Container.jsx'
 import SectionHeader from './SectionHeader.jsx'
 import Reveal from './Reveal.jsx'
-import { AwardIcon, ShieldCheckIcon, TrophyIcon } from './Icons.jsx'
+import Lightbox from './Lightbox.jsx'
+import { ShieldCheckIcon, TrophyIcon } from './Icons.jsx'
 import { achievements, certifications } from '../data/portfolio.js'
 
-function Seal({ label }) {
-  const text = `${label} • `.repeat(3)
+const certFiles = import.meta.glob('../assets/certificates/*.webp', { eager: true, query: '?url', import: 'default' })
+const certImage = (name, variant) => certFiles[`../assets/certificates/${name}-${variant}.webp`]
+
+function ExpandIcon(props) {
   return (
-    <div className="relative h-40 w-40 sm:h-44 sm:w-44">
-      <motion.svg
-        viewBox="0 0 200 200"
-        className="absolute inset-0 h-full w-full"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
+    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true" {...props}>
+      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+    </svg>
+  )
+}
+
+// The certificate shown as a framed paper document: fixed height, natural
+// aspect ratio, so any certificate image fits without distortion or cropping.
+// Clicking opens the full-resolution image.
+function CertificateFrame({ cert, onOpen }) {
+  const src = certImage(cert.image, 'card')
+  return (
+    <button
+      type="button"
+      onClick={onOpen}
+      aria-label={`View the ${cert.short} certificate full size`}
+      className="group/cert relative block cursor-zoom-in rounded-md outline-offset-[10px]"
+    >
+      <span
         aria-hidden="true"
-      >
-        <defs>
-          <path id="seal-circle" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0" />
-        </defs>
-        <text className="fill-accent text-[11.5px] font-semibold tracking-[0.25em] uppercase">
-          <textPath href="#seal-circle">{text}</textPath>
-        </text>
-      </motion.svg>
-      <div className="absolute inset-7 grid place-items-center rounded-full border border-accent/40 bg-accent/10 shadow-[0_0_40px_-6px] shadow-accent/50">
-        <AwardIcon width={44} height={44} className="text-accent" />
-      </div>
-    </div>
+        className="absolute -inset-8 rounded-full bg-accent/20 opacity-60 blur-3xl transition-opacity duration-500 group-hover/cert:opacity-100"
+      />
+      <span className="relative block -rotate-2 rounded-md bg-[#f3f0e6] p-1.5 shadow-[0_28px_50px_-14px_rgba(0,0,0,0.85)] ring-1 ring-white/10 transition-transform duration-500 ease-out group-hover/cert:rotate-0 group-hover/cert:scale-[1.04] group-focus-visible/cert:rotate-0 motion-reduce:transition-none">
+        <img
+          src={src}
+          alt={`${cert.title} certificate issued by ${cert.issuer}`}
+          width="900"
+          height="1240"
+          loading="lazy"
+          decoding="async"
+          draggable="false"
+          className="block h-56 w-auto rounded-[3px] sm:h-64"
+        />
+      </span>
+      <span className="absolute -bottom-4 left-1/2 inline-flex -translate-x-1/2 items-center gap-1.5 rounded-full border border-accent/50 bg-ink/95 px-3 py-1.5 text-[10px] font-semibold tracking-[0.2em] whitespace-nowrap text-accent uppercase shadow-lg shadow-black/50 transition-colors group-hover/cert:border-accent group-hover/cert:bg-ink">
+        <ExpandIcon /> view certificate
+      </span>
+    </button>
   )
 }
 
@@ -60,7 +83,7 @@ function CardShell({ index, badge, visual, category, title, subtitle, descriptio
       <span className="absolute top-4 right-4 z-10 inline-flex items-center gap-1.5 rounded-full border border-accent/40 bg-ink/80 px-3 py-1 text-[10px] font-semibold tracking-[0.2em] text-accent uppercase">
         <ShieldCheckIcon width={12} height={12} /> {badge}
       </span>
-      <div className="relative grid h-64 place-items-center overflow-hidden border-b border-white/10 bg-[radial-gradient(ellipse_at_center,rgba(74,222,128,0.12),transparent_70%)]">
+      <div className="relative grid h-80 place-items-center overflow-hidden border-b border-white/10 bg-[radial-gradient(ellipse_at_center,rgba(74,222,128,0.12),transparent_70%)] sm:h-96">
         <div className="absolute inset-0 bg-grid opacity-60" />
         <div className="relative">{visual}</div>
       </div>
@@ -78,6 +101,8 @@ function CardShell({ index, badge, visual, category, title, subtitle, descriptio
 export default function Certifications() {
   const cert = certifications[0]
   const award = achievements[0]
+  const [viewing, setViewing] = useState(false)
+  const close = useCallback(() => setViewing(false), [])
 
   return (
     <section
@@ -99,7 +124,7 @@ export default function Certifications() {
               Captain on court.
             </>
           }
-          meta="Professional Java certification from IJSE, and years of leading a team on the badminton court."
+          meta="A Comprehensive Master Java Developer diploma from IJSE, and years of leading a team on the badminton court."
         />
 
         <div className="mt-16 grid gap-8 md:grid-cols-2">
@@ -107,13 +132,23 @@ export default function Certifications() {
             <CardShell
               index={1}
               badge="certified"
-              visual={<Seal label={cert.short + ' • IJSE'} />}
+              visual={<CertificateFrame cert={cert} onOpen={() => setViewing(true)} />}
               category={cert.category}
               title={cert.title}
               subtitle={cert.issuer}
               description={cert.description}
             >
-              <ul className="mt-6 flex flex-wrap gap-2">
+              <dl className="mt-5 grid grid-cols-2 gap-3 border-y border-white/10 py-4 text-xs">
+                <div>
+                  <dt className="text-[10px] tracking-[0.2em] text-subtle uppercase">issued</dt>
+                  <dd className="mt-1 text-fg">{cert.issued}</dd>
+                </div>
+                <div>
+                  <dt className="text-[10px] tracking-[0.2em] text-subtle uppercase">credential id</dt>
+                  <dd className="mt-1 text-fg">{cert.credentialId}</dd>
+                </div>
+              </dl>
+              <ul className="mt-5 flex flex-wrap gap-2">
                 {cert.topics.map((t) => (
                   <li key={t} className="rounded-md border border-white/10 px-2 py-1 text-[11px] text-muted">
                     {t}
@@ -140,6 +175,18 @@ export default function Certifications() {
           </Reveal>
         </div>
       </Container>
+
+      <AnimatePresence>
+        {viewing && (
+          <Lightbox
+            title={`${cert.short} certificate · ${cert.issuer}`}
+            images={[certImage(cert.image, 'full')]}
+            label={`${cert.title} certificate, full size`}
+            alt={() => `${cert.title} certificate issued by ${cert.issuer}, ${cert.issued}`}
+            onClose={close}
+          />
+        )}
+      </AnimatePresence>
     </section>
   )
 }
