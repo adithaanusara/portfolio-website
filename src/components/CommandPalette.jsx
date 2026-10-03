@@ -1,17 +1,18 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { navLinks, profile } from '../data/portfolio.js'
 import { resumeFileName, resumeUrl } from '../data/resume.js'
+import { lockScroll, scrollToId } from '../lib/scroll.js'
 
 export const shortcutLabel = /Mac|iPhone|iPad/.test(navigator.userAgent) ? '⌘K' : 'Ctrl K'
 
 const commands = [
-  ...navLinks.map((link) => ({
+  ...[...navLinks, { id: 'contact', label: 'contact' }].map((link) => ({
     id: `go-${link.id}`,
     label: `cd ${link.label}`,
     hint: 'navigate',
-    run: () => {
-      window.location.hash = link.id
-    },
+    run: () => scrollToId(link.id),
+    // Scrolling is locked while the palette is open, so run after it closes.
+    afterClose: true,
   })),
   {
     id: 'copy-email',
@@ -89,11 +90,11 @@ export default function CommandPalette({ open, onOpenChange }) {
     setQuery('')
     setIndex(0)
     setFlash(null)
-    document.body.style.overflow = 'hidden'
+    lockScroll(true)
     inputRef.current?.focus()
     return () => {
-      document.body.style.overflow = ''
-      previouslyFocused?.focus?.()
+      lockScroll(false)
+      previouslyFocused?.focus?.({ preventScroll: true })
     }
   }, [open])
 
@@ -107,6 +108,11 @@ export default function CommandPalette({ open, onOpenChange }) {
 
   const execute = (command) => {
     if (!command) return
+    if (command.afterClose) {
+      close()
+      setTimeout(command.run, 0)
+      return
+    }
     command.run()
     if (command.feedback) {
       setFlash(command.feedback)
@@ -175,7 +181,13 @@ export default function CommandPalette({ open, onOpenChange }) {
             {flash}
           </p>
         ) : (
-          <ul ref={listRef} id="command-list" role="listbox" className="max-h-80 overflow-y-auto py-2">
+          <ul
+            ref={listRef}
+            id="command-list"
+            role="listbox"
+            data-lenis-prevent
+            className="max-h-80 overflow-y-auto py-2"
+          >
             {results.length === 0 && <li className="px-4 py-3 text-sm text-subtle">no matching commands</li>}
             {results.map((c, i) => (
               <li
