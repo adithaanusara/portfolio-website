@@ -26,7 +26,7 @@ export const navLinks = [
 
 export const ribbons = {
   intro: ['Full Stack Development', 'Distributed Systems', 'Microservices', 'AI & LLM Apps', 'React · Next.js · NestJS', 'Spring Boot · FastAPI'],
-  journey: ['University of Colombo School of Computing', 'B.Sc. in Computer Science', 'IJSE', 'Certified Master Java Developer', 'Mahinda College, Galle'],
+  journey: ['University of Colombo School of Computing', 'B.Sc. in Computer Science', 'IJSE', 'Comprehensive Master Java Developer', 'Mahinda College, Galle'],
   stack: ['Frontend · Backend · DevOps', 'Docker · Kubernetes · RabbitMQ', 'Claude API · RAG · Tool Calling', 'PostgreSQL · MySQL · Prisma'],
   footer: [`GitHub: @adithaanusara`, 'Colombo, Sri Lanka', 'adithaanusara31@gmail.com', 'Full Stack & Distributed Systems'],
 }
@@ -282,26 +282,31 @@ export const journey = [
     kind: 'Program',
     title: 'Software Engineering Program',
     detail: 'Professional software engineering training',
-    institution: 'Institute of Java and Software Engineering (IJSE)',
+    institution: 'Institute of Software Engineering (IJSE)',
     period: '2026',
   },
   {
     kind: 'Certification',
-    title: 'Certified Master Java Developer',
-    detail: 'CMJD — SOLID, design patterns, Spring, Hibernate',
-    institution: 'Institute of Java and Software Engineering (IJSE)',
-    period: null,
+    title: 'Comprehensive Master Java Developer',
+    detail: 'CMJD diploma — SOLID, design patterns, Spring, Hibernate',
+    institution: 'Institute of Software Engineering (IJSE)',
+    period: 'June 2026',
   },
 ]
 
+// Certificate images live in src/assets/certificates as <image>-card.webp
+// (shown in the card) and <image>-full.webp (opened in the viewer).
 export const certifications = [
   {
-    title: 'Certified Master Java Developer (CMJD)',
+    title: 'Comprehensive Master Java Developer (CMJD)',
     short: 'CMJD',
-    issuer: 'Institute of Java and Software Engineering (IJSE)',
-    category: 'Software Engineering',
+    issuer: 'Institute of Software Engineering (IJSE), Sri Lanka',
+    category: 'Software Engineering · Diploma',
+    issued: 'June 2026',
+    credentialId: 'C-2025-10165',
+    image: 'cmjd-certificate',
     description:
-      'Deep dive into SOLID principles, layered architecture, design patterns, DSA, Spring Framework, Hibernate/ORM, JDBC, and Java EE.',
+      'Diploma fulfilling the requirements of the Oracle Certified Associate and Professional Java SE examinations (OCAJP / OCPJP). Deep dive into SOLID principles, layered architecture, design patterns, DSA, Spring Framework, Hibernate/ORM, JDBC, and Java EE.',
     topics: ['SOLID', 'Design Patterns', 'DSA', 'Spring', 'Hibernate', 'JDBC', 'Java EE'],
   },
 ]
