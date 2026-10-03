@@ -53,7 +53,9 @@ src/
 ## Accessibility & performance
 
 - Respects `prefers-reduced-motion`: smooth scroll, marquees and animations switch off; all content stays visible.
-- Canvas and WebGL animations pause when off screen; the globe library loads only when the contact section is reached.
+- Canvas and WebGL animations stop completely when off screen or in a background tab.
+- The globe is created at an idle moment after load (so its shader compile never lands mid-scroll), redraws at 30 fps and renders below screen resolution. Its cost depends only on canvas pixels × frames — dot count and the shader's rim glow are free — so resolution is the knob in `renderBudget()` in [`Globe.jsx`](src/components/Globe.jsx).
+- Avoid `blur()` filters, `backdrop-filter` and masks on large areas, especially near anything animated: they were the main cost when scrolling the contact section. Glows and fades there are plain gradients instead.
 - The journey timeline's winding road is an SVG path built from the nodes' measured positions, so it follows them at any screen size. Its scroll-driven fill updates the SVG directly (no React re-render per frame) and its layers are sized tightly around the road to keep the glow cheap.
 - Keyboard: skip link, visible focus rings, ⌘K / Ctrl+K command palette, arrow keys in the project carousel.
 
