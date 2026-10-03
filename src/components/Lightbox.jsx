@@ -4,10 +4,18 @@ import { AnimatePresence, motion } from 'motion/react'
 import { ArrowLeftIcon, ArrowRightIcon, CloseIcon } from './Icons.jsx'
 import { lockScroll } from '../lib/scroll.js'
 
-// Full-size screenshot viewer. Arrow keys / buttons to browse, Esc or
-// clicking the backdrop to close. Portalled to <body> so it sits above the
-// navbar regardless of the section's stacking context.
-export default function Lightbox({ title, images, startIndex = 0, onClose }) {
+// Full-size image viewer. Arrow keys / buttons to browse, Esc or clicking the
+// backdrop to close. Portalled to <body> so it sits above the navbar
+// regardless of the section's stacking context. `label` names the dialog and
+// `alt(i, n)` describes each image for screen readers.
+export default function Lightbox({
+  title,
+  images,
+  startIndex = 0,
+  onClose,
+  label = `${title} screenshots`,
+  alt = (i, n) => `${title} screenshot ${i + 1} of ${n}`,
+}) {
   const [index, setIndex] = useState(startIndex)
   const closeRef = useRef(null)
   const count = images.length
@@ -37,7 +45,7 @@ export default function Lightbox({ title, images, startIndex = 0, onClose }) {
     <motion.div
       role="dialog"
       aria-modal="true"
-      aria-label={`${title} screenshots`}
+      aria-label={label}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -46,10 +54,13 @@ export default function Lightbox({ title, images, startIndex = 0, onClose }) {
     >
       <div className="flex items-center justify-between gap-4 px-4 py-4 sm:px-8">
         <p className="text-sm text-fg">
-          {title}{' '}
-          <span className="text-subtle">
-            · {index + 1} / {count}
-          </span>
+          {title}
+          {count > 1 && (
+            <span className="text-subtle">
+              {' '}
+              · {index + 1} / {count}
+            </span>
+          )}
         </p>
         <button ref={closeRef} type="button" onClick={onClose} aria-label="Close" className={navButton}>
           <CloseIcon width={16} height={16} />
@@ -70,7 +81,7 @@ export default function Lightbox({ title, images, startIndex = 0, onClose }) {
             <motion.img
               key={images[index]}
               src={images[index]}
-              alt={`${title} screenshot ${index + 1} of ${count}`}
+              alt={alt(index, count)}
               initial={{ opacity: 0, scale: 0.98 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.98 }}
