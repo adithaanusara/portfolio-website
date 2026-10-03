@@ -68,7 +68,7 @@ function MarqueeRow({ items, reverse }) {
 
 export default function Stack() {
   return (
-    <section id="stack" className="relative isolate scroll-mt-24 py-24 sm:py-32">
+    <section id="stack" className="relative isolate scroll-mt-24 overflow-x-clip py-24 sm:py-32">
       <Container size="lg">
         <SectionHeader
           badge="tech stack"

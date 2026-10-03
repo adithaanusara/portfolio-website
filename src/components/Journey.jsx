@@ -47,7 +47,7 @@ export default function Journey() {
   const fill = useSpring(scrollYProgress, { stiffness: 120, damping: 30 })
 
   return (
-    <section id="journey" className="relative isolate scroll-mt-24 py-24 sm:py-32">
+    <section id="journey" className="relative isolate scroll-mt-24 overflow-x-clip py-24 sm:py-32">
       <div className="absolute inset-0 -z-20 bg-grid [mask-image:linear-gradient(to_bottom,transparent,black_20%,black_80%,transparent)]" />
       <Container size="lg">
         <SectionHeader
