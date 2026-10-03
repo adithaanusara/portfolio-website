@@ -3,12 +3,19 @@ import { AnimatePresence, motion } from 'motion/react'
 import Container from './Container.jsx'
 import SectionHeader from './SectionHeader.jsx'
 import Reveal from './Reveal.jsx'
-import Lightbox from './Lightbox.jsx'
+import Lightbox, { preloadImages } from './Lightbox.jsx'
 import { ShieldCheckIcon, TrophyIcon } from './Icons.jsx'
 import { achievements, certifications } from '../data/portfolio.js'
 
 const certFiles = import.meta.glob('../assets/certificates/*.webp', { eager: true, query: '?url', import: 'default' })
 const certImage = (name, variant) => certFiles[`../assets/certificates/${name}-${variant}.webp`]
+
+// An achievement's certificates with their image URLs resolved. Entries whose
+// files are missing are dropped, so the card never links to a broken image.
+const galleryOf = (achievement) =>
+  (achievement.certificates ?? [])
+    .map((c) => ({ ...c, full: certImage(c.image, 'full'), thumb: certImage(c.image, 'thumb') }))
+    .filter((c) => c.full && c.thumb)
 
 function ExpandIcon(props) {
   return (
@@ -23,10 +30,14 @@ function ExpandIcon(props) {
 // Clicking opens the full-resolution image.
 function CertificateFrame({ cert, onOpen }) {
   const src = certImage(cert.image, 'card')
+  const warm = () => preloadImages([certImage(cert.image, 'full')])
   return (
     <button
       type="button"
       onClick={onOpen}
+      onPointerEnter={(e) => e.pointerType === 'mouse' && warm()}
+      onPointerDown={warm}
+      onFocus={warm}
       aria-label={`View the ${cert.short} certificate full size`}
       className="group/cert relative block cursor-zoom-in rounded-md outline-offset-[10px]"
     >
@@ -50,6 +61,71 @@ function CertificateFrame({ cert, onOpen }) {
         <ExpandIcon /> view certificate
       </span>
     </button>
+  )
+}
+
+const THUMB_TILT = ['-rotate-3', 'rotate-2', '-rotate-1']
+
+// Small paper previews of an achievement's certificates, and the button that
+// opens them in the gallery. Each preview opens the gallery at that
+// certificate. The full-size images start loading on intent — all of them
+// when a mouse moves over the block, one when it is pressed or focused — so
+// the gallery opens without a wait.
+function CertificatePreviews({ items, issuer, onOpen }) {
+  const count = items.length
+  const years = [...new Set(items.map((c) => c.year))].join(', ')
+  return (
+    <div
+      className="mt-auto pt-7"
+      onPointerEnter={(e) => e.pointerType === 'mouse' && preloadImages(items.map((c) => c.full))}
+    >
+      <div className="border-t border-white/10 pt-6">
+        <ul className="flex gap-3.5">
+          {items.map((c, i) => (
+            <li key={c.image}>
+              <button
+                type="button"
+                onClick={() => onOpen(i)}
+                onPointerDown={() => preloadImages([c.full])}
+                onFocus={() => preloadImages([c.full])}
+                aria-label={`View certificate ${i + 1} of ${count}: ${c.event}, ${c.result}`}
+                className={`block cursor-zoom-in rounded-[5px] bg-[#f3f0e6] p-1 shadow-[0_14px_24px_-12px_rgba(0,0,0,0.9)] ring-1 ring-white/10 transition-transform duration-300 ease-out hover:-translate-y-1 hover:rotate-0 focus-visible:rotate-0 motion-reduce:transition-none ${
+                  THUMB_TILT[i % THUMB_TILT.length]
+                }`}
+              >
+                <img
+                  src={c.thumb}
+                  alt=""
+                  width="240"
+                  height="338"
+                  loading="lazy"
+                  decoding="async"
+                  draggable="false"
+                  className="block h-24 w-auto rounded-[2px]"
+                />
+              </button>
+            </li>
+          ))}
+        </ul>
+        <div className="mt-6 flex flex-wrap items-center gap-x-4 gap-y-3">
+          <button
+            type="button"
+            onClick={() => onOpen(0)}
+            onPointerDown={() => preloadImages([items[0].full])}
+            onFocus={() => preloadImages([items[0].full])}
+            className="group/open inline-flex items-center gap-2 rounded-full border border-accent/50 px-4 py-2 text-[11px] font-semibold tracking-[0.2em] whitespace-nowrap text-accent uppercase transition-colors hover:border-accent hover:bg-accent hover:text-ink"
+          >
+            <ExpandIcon /> view certificates
+            <span className="rounded-full bg-accent px-1.5 text-[10px] leading-4 tracking-normal text-ink transition-colors group-hover/open:bg-ink group-hover/open:text-accent">
+              {count}
+            </span>
+          </button>
+          <p className="text-[11px] leading-4 text-subtle">
+            {issuer} · {years}
+          </p>
+        </div>
+      </div>
+    </div>
   )
 }
 
@@ -98,11 +174,24 @@ function CardShell({ index, badge, visual, category, title, subtitle, descriptio
   )
 }
 
+const cert = certifications[0]
+const award = achievements[0]
+const gallery = galleryOf(award)
+const galleryImages = gallery.map((c) => c.full)
+const galleryThumbs = gallery.map((c) => c.thumb)
+const galleryCaptions = gallery.map((c) => (
+  <>
+    <span className="text-fg">{c.event}</span>
+    <span className="mt-0.5 block text-accent">{c.result}</span>
+  </>
+))
+
 export default function Certifications() {
-  const cert = certifications[0]
-  const award = achievements[0]
   const [viewing, setViewing] = useState(false)
   const close = useCallback(() => setViewing(false), [])
+  // Index of the achievement certificate open in the gallery, or null.
+  const [galleryAt, setGalleryAt] = useState(null)
+  const closeGallery = useCallback(() => setGalleryAt(null), [])
 
   return (
     <section
@@ -171,7 +260,11 @@ export default function Certifications() {
               title={award.title}
               subtitle={award.levels.join(' · ') + ' level'}
               description={award.description}
-            />
+            >
+              {gallery.length > 0 && (
+                <CertificatePreviews items={gallery} issuer={award.certificatesIssuer} onOpen={setGalleryAt} />
+              )}
+            </CardShell>
           </Reveal>
         </div>
       </Container>
@@ -184,6 +277,19 @@ export default function Certifications() {
             label={`${cert.title} certificate, full size`}
             alt={() => `${cert.title} certificate issued by ${cert.issuer}, ${cert.issued}`}
             onClose={close}
+          />
+        )}
+        {galleryAt !== null && (
+          <Lightbox
+            title="Badminton certificates"
+            label="Badminton certificates, full size"
+            noun="certificate"
+            images={galleryImages}
+            thumbs={galleryThumbs}
+            captions={galleryCaptions}
+            alt={(i) => `Certificate: ${gallery[i].event}. ${gallery[i].result}. Issued by ${award.certificatesIssuer}.`}
+            startIndex={galleryAt}
+            onClose={closeGallery}
           />
         )}
       </AnimatePresence>

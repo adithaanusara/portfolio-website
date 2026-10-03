@@ -311,11 +311,36 @@ export const certifications = [
   },
 ]
 
+// `certificates` are shown as a gallery. Their images live in
+// src/assets/certificates as <image>-thumb.webp (preview on the card) and
+// <image>-full.webp (opened in the viewer). `event` and `result` are worded
+// as printed on each certificate.
 export const achievements = [
   {
     title: 'Former School Badminton Team Captain',
     category: 'Sport & Leadership',
     description: 'Captained the school badminton team and played at District, Provincial and National level.',
     levels: ['District', 'Provincial', 'National'],
+    certificatesIssuer: 'Sri Lanka Schools Badminton Association',
+    certificates: [
+      {
+        image: 'badminton-team-2018',
+        event: 'Sri Lanka Schools Under 15 Badminton Team Championship 2018',
+        result: "Champions, 'C' Division (Boys)",
+        year: 2018,
+      },
+      {
+        image: 'badminton-singles-2018',
+        event: 'Junior National Badminton Championship 2018',
+        result: 'Quarter-finalist, Under 15 Boys Singles',
+        year: 2018,
+      },
+      {
+        image: 'badminton-doubles-2018',
+        event: 'Junior National Badminton Championship 2018',
+        result: 'Quarter-finalist, Under 15 Boys Doubles',
+        year: 2018,
+      },
+    ],
   },
 ]
