@@ -71,10 +71,7 @@ export default function Hero() {
               />
               <span className="sr-only"> Anusara</span>
             </h1>
-            <p className="mt-5 text-lg text-muted sm:text-xl" aria-hidden="true">
-              Anusara <span className="text-subtle">—</span>{' '}
-              <span className="text-fg">{profile.tagline}</span>
-            </p>
+            <p className="mt-5 text-lg text-fg sm:text-xl">{profile.tagline}</p>
           </div>
 
           <div className="shrink-0 lg:max-w-sm">
