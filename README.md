@@ -1,5 +1,7 @@
 # Aditha Anusara — Portfolio
 
+**Live:** https://aditha.me
+
 Personal developer portfolio built with React, Vite and Tailwind CSS. Dark, high-contrast, terminal-green design set entirely in JetBrains Mono, with scroll-driven animation throughout.
 
 ## Tech
@@ -64,3 +66,5 @@ src/
 ## Deployment
 
 Deploys to Vercel on every push to `main` (build command `npm run build`, output directory `dist`).
+
+The site is served at `aditha.me`; `www.aditha.me` redirects to it. DNS is at Namecheap: two `A` records for `@` and a `CNAME` for `www`, with the values shown under **Settings → Domains** in the Vercel project.
