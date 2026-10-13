@@ -165,6 +165,7 @@ export const projects = [
     stack: ['Next.js', 'TypeScript', 'Tailwind CSS', 'FastAPI', 'PostgreSQL', 'PayHere', 'Docker'],
     repo: 'https://github.com/adithaanusara/wearai',
     demo: 'https://wearai-web.vercel.app',
+    screenshots: 'wearai',
     highlights: [
       ['AI', 'RAG + Tools'],
       ['Payments', 'PayHere'],
